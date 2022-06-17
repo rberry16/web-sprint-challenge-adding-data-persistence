@@ -2,8 +2,9 @@
 const router = require('express').Router();
 const Project = require('./model');
 
-router.get('/project', (req, res, next) => {
-    res.json('project');
+router.post('/project', async (req, res, next) => {
+    const project = await Project.insert(req.body);
+    res.json(project)
 });
 
 module.exports = router;

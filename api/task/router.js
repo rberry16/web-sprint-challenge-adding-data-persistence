@@ -2,8 +2,9 @@
 const router = require('express').Router();
 const Task = require('./model');
 
-router.get('/task', (req, res, next) => {
-    res.json('task');
+router.get('/tasks', async (req, res, next) => {
+    const tasks = await Task.find();
+    res.json(tasks);
 });
 
 module.exports = router;

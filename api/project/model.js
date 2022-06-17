@@ -16,7 +16,7 @@ const insert = async (project) => {
 const find = async () => {
     const projects = await db('projects');
     await projects.forEach(pro => {
-        if (pro.project_completed === 0) {
+        if (pro.project_completed === 0 || pro.project_completed === null) {
             pro.project_completed = false;
         } else if (pro.project_completed === 1) {
             pro.project_completed = true;

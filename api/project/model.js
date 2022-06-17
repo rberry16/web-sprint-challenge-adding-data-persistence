@@ -4,21 +4,28 @@ const db = require('../../data/dbConfig');
 const insert = async (project) => {
     await db('projects').insert(project);
     const newProject = await db('projects').where('project_name', project.project_name).first();
-    let comp = false;
     if (newProject.project_completed === 0) {
-        comp = false;
+        newProject.project_completed = false;
+        return newProject;
     } else if (newProject.project_completed === 1) {
-        comp = true;
-    }
-
-    return {
-        project_id: newProject.project_id,
-        project_name: newProject.project_name,
-        project_description: newProject.project_description,
-        project_completed: comp
+        newProject.project_completed = true;
+        return newProject;
     }
 }
 
+const find = async () => {
+    const projects = await db('projects');
+    await projects.forEach(pro => {
+        if (pro.project_completed === 0) {
+            pro.project_completed = false;
+        } else if (pro.project_completed === 1) {
+            pro.project_completed = true;
+        }
+    });
+    return projects;
+}
+
 module.exports = {
-    insert
+    insert,
+    find
 }

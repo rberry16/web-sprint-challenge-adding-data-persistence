@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const Project = require('./model');
 
-router.post('/project', async (req, res, next) => {
+router.post('/project', async (req, res) => {
     const project = await Project.insert(req.body);
     res.json(project)
 });

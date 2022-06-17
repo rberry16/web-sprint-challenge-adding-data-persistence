@@ -7,6 +7,12 @@ const insert = async (resource) => {
     return {newResource};
 }
 
+const find = async () => {
+    const resources = await db('resources');
+    return resources;
+}
+
 module.exports = {
-    insert
+    insert,
+    find
 }
